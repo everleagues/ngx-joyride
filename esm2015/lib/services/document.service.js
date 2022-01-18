@@ -15,7 +15,13 @@ export class DocumentService {
         }
     }
     getElementFixedTop(elementRef) {
-        return elementRef.nativeElement.getBoundingClientRect().left;
+        // FIXED: https://github.com/tnicola/ngx-joyride/issues/251
+        const scrollOffsets = this.getScrollOffsets();
+        return (
+            elementRef.nativeElement.getBoundingClientRect().top +
+            scrollOffsets.y
+        );
+        //return elementRef.nativeElement.getBoundingClientRect().top;
     }
     getElementFixedLeft(elementRef) {
         return elementRef.nativeElement.getBoundingClientRect().left;
